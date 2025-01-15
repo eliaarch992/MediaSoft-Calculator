@@ -1,0 +1,23 @@
+name: Build MediaSoft Calculator with MSBuild
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow on pull requests targeting the main branch
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use a Windows runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Check out the repository code
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1  # Set up MSBuild for building the project
+
+      - name: Build with MSBuild
+        run: msbuild /p:Configuration=Release MediaSoft\ Calculator.sln  # Build the solution in Release mode
